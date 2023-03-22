@@ -1,4 +1,5 @@
 #include "logger.h"
+#include "asserts.h"
 
 // TODO: temporary
 #include <stdio.h>
@@ -41,4 +42,8 @@ MACHINEAPI void log_output(loglevel level, const char* fmt, ...) {
 
 	// TODO: platform-specific output
 	puts(final_out_message);
+}
+
+MACHINEAPI void report_assertion_failure(const char* expr, const char* msg, const char* file, i32 line) {
+	log_output(LOG_LEVEL_FATAL, "Assertion Failure: %s, message: %s, in file: %s, lin: %d", expr, msg, file, line);
 }
