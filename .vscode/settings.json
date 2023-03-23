@@ -49,6 +49,11 @@
 	"files.associations": {
 		"stdarg.h": "c",
 		"string": "c",
-		"logger.h": "c"
+		"logger.h": "c",
+		"platform.h": "c",
+		"defines.h": "c",
+		"stdbool.h": "c",
+		"windows.h": "c",
+		"windowsx.h": "c"
 	}
 }

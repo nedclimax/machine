@@ -1,6 +1,8 @@
 #include <core/logger.h>
 #include <core/asserts.h>
 
+#include <stdio.h>
+
 int main(void) {
 	LOG_FATAL("A test message: %f", 3.14f);
 	LOG_ERROR("A test message: %f", 3.14f);
@@ -9,6 +11,8 @@ int main(void) {
 	LOG_DEBUG("A test message: %f", 3.14f);
 	LOG_TRACE("A test message: %f", 3.14f);
 
-	ASSERT(0 == 1);
+	//ASSERT(0 == 1);
+
+	getchar();
 	return 0;
 }

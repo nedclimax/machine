@@ -6,7 +6,7 @@
 #include <stdarg.h>
 #include <string.h>
 
-b8 initialze_logging() {
+b8 initialize_logging() {
 	// TODO: create log file.
 	return true;
 }
@@ -45,5 +45,5 @@ MACHINEAPI void log_output(loglevel level, const char* fmt, ...) {
 }
 
 MACHINEAPI void report_assertion_failure(const char* expr, const char* msg, const char* file, i32 line) {
-	log_output(LOG_LEVEL_FATAL, "Assertion Failure: %s, message: %s, in file: %s, lin: %d", expr, msg, file, line);
+	log_output(LOG_LEVEL_FATAL, "Assertion Failure: %s, message: %s, in file: %s, line: %d", expr, msg, file, line);
 }

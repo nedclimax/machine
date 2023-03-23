@@ -21,7 +21,7 @@ typedef enum {
 	LOG_LEVEL_TRACE = 5,
 } loglevel;
 
-b8 initialze_logging();
+b8 initialize_logging();
 void shutdown_logging();
 
 MACHINEAPI void log_output(loglevel level, const char* fmt, ...);
