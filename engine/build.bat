@@ -1,5 +1,5 @@
-REM Build script for engine
 @ECHO OFF
+REM Build script for engine
 SetLocal EnableDelayedExpansion
 
 REM Get a list of all the .c files.
@@ -17,5 +17,5 @@ SET includeFlags=-Isrc -I%VULKAN_SDK%/Include
 SET linkerFlags=-luser32 -lvulkan-1 -L%VULKAN_SDK%/Lib
 SET defines=-D_DEBUG -DMACHINE_EXPORT -D_CRT_SECURE_NO_WARNINGS
 
-ECHO "Building %assembly%%..."
+ECHO "Building %assembly%..."
 clang %cFilenames% %compilerFlags% -o ../bin/%assembly%.dll %defines% %includeFlags% %linkerFlags%

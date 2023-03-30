@@ -22,16 +22,60 @@ LRESULT CALLBACK win32_process_message(
 	WPARAM wparam,
 	LPARAM lparam
 ) {
-	LRESULT res = 0;
-	switch (message)
-	{
+	switch (message) {
+		case WM_ERASEBKGND:
+			// Notify the OS that erasing will be handled by the application to prevent flicker.
+			return 1;
+		case WM_CLOSE:
+			// TODO: Fire an event for the application to quit.
+			return 0;
 		case WM_DESTROY:
 			PostQuitMessage(0);
-		default:
-			res = DefWindowProc(window, message, wparam, lparam);
+			return 0;
+		case WM_SIZE: {
+			// Get the updated size.
+			// RECT r;
+			// GetClientRect(hwnd, &r);
+			// u32 width = r.right - r.left;
+			// u32 height = r.bottom - r.top;
+
+			// TODO: Fire an event for window resize.
+		} break;
+		case WM_KEYDOWN:
+		case WM_SYSKEYDOWN:
+		case WM_KEYUP:
+		case WM_SYSKEYUP: {
+			// Key pressed/released
+			// b8 pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
+			// TODO: input processing
+		} break;
+		case WM_MOUSEMOVE: {
+			// Mouse move
+			// i32 x_position = GET_X_LPARAM(l_param);
+			// i32 y_position = GET_Y_LPARAM(l_param);
+			// TODO: input processing.
+		} break;
+		case WM_MOUSEWHEEL: {
+			// i32 z_delta = GET_WHEEL_DELTA_WPARAM(w_param);
+			// if (z_delta != 0) {
+			// 	// Flatten the input to an OS-independent (-1, 1)
+			//	z_delta = (z_delta < 0) ? -1 : 1;
+			//	// TODO: input processing.
+			// }
+		}
 		break;
+		case WM_LBUTTONDOWN:
+		case WM_MBUTTONDOWN:
+		case WM_RBUTTONDOWN:
+		case WM_LBUTTONUP:
+		case WM_MBUTTONUP:
+		case WM_RBUTTONUP: {
+			// b8 pressed = msg == WM_LBUTTONDOWN || msg == WM_RBUTTONDOWN || msg == WM_MBUTTONDOWN;
+			//  TODO: input processing.
+		} break;
 	}
-	return res;
+
+	return DefWindowProcA(window, message, wparam, lparam);
 }
 
 b8 platform_startup(

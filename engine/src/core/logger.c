@@ -1,6 +1,8 @@
 #include "logger.h"
 #include "asserts.h"
 
+#include "platform/platform.h"
+
 // TODO: temporary
 #include <stdio.h>
 #include <stdarg.h>
@@ -15,7 +17,7 @@ void shutdown_logging() {
 	// TODO: cleanup logging/write queued entries
 }
 
-MACHINEAPI void log_output(loglevel level, const char* fmt, ...) {
+void log_output(loglevel level, const char* fmt, ...) {
 	const char* level_strings[] = {
 		"[FATAL]: ",
 		"[ERROR]: ",
@@ -25,23 +27,26 @@ MACHINEAPI void log_output(loglevel level, const char* fmt, ...) {
 		"[TRACE]: ",
 	};
 
-	//b8 is_error = level < LOG_LEVEL_WARN;
-
-	char out_message[32000];
-	memset(out_message, 0, 32000);
+	b8 is_error = level < LOG_LEVEL_WARN;
+	const i32 msg_length = 32000;
+	char out_message[msg_length];
+	memset(out_message, 0, msg_length);
 
 	va_list list;
 	va_start(list, fmt);
-	vsnprintf(out_message, 32000, fmt, list);
+	vsnprintf(out_message, msg_length, fmt, list);
 	va_end(list);
 
-	char final_out_message[32000];
-	memset(final_out_message, 0, 32000);
+	char final_out_message[msg_length];
+	memset(final_out_message, 0, msg_length);
 
 	sprintf(final_out_message, "%s%s\n", level_strings[level], out_message);
 
-	// TODO: platform-specific output
-	puts(final_out_message);
+	if (is_error) {
+		platform_console_write_error(final_out_message, level);
+	} else {
+		platform_console_write(final_out_message, level);
+	}
 }
 
 MACHINEAPI void report_assertion_failure(const char* expr, const char* msg, const char* file, i32 line) {

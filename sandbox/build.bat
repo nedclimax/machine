@@ -1,5 +1,5 @@
-REM Build script for sandbox
 @ECHO OFF
+REM Build script for sandbox
 SetLocal EnableDelayedExpansion
 
 REM Get a list of all the .c files.
@@ -17,5 +17,5 @@ SET includeFlags=-Isrc -I../engine/src/
 SET linkerFlags=-L../bin/ -lengine.lib
 SET defines=-D_DEBUG -DMACHINE_IMPORT
 
-ECHO "Building %assembly%%..."
+ECHO "Building %assembly%..."
 clang %cFilenames% %compilerFlags% -o ../bin/%assembly%.exe %defines% %includeFlags% %linkerFlags%

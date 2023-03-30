@@ -19,7 +19,7 @@
 			"italic": false
 		},
 		{
-			"tag": "//",
+			"tag": "--",
 			"color": "#474747",
 			"strikethrough": true,
 			"underline": false,
@@ -54,6 +54,8 @@
 		"defines.h": "c",
 		"stdbool.h": "c",
 		"windows.h": "c",
-		"windowsx.h": "c"
-	}
+		"windowsx.h": "c",
+		"stdio.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }
